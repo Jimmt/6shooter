@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Fire
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - Enemies
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 1093696345
+    locked: 0
+  - name: Foreground
+    uniqueID: 1859086223
+    locked: 0
+  - name: Characters
+    uniqueID: 3940858523
+    locked: 0
+  - name: UI
+    uniqueID: 771169021
+    locked: 0
+  - name: muzzle flash
+    uniqueID: 1576522635
+    locked: 0
+  - name: barrel
+    uniqueID: 796031881
+    locked: 0
+  - name: hammer
+    uniqueID: 1216957247
+    locked: 0
+  - name: body
+    uniqueID: 595572683
+    locked: 0

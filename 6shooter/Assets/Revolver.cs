@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class Revolver : MonoBehaviour {
     public EnemySpawner enemySpawner;
     public UIHandler uiHandler;
+    public AudioSource audioSource;
     public int score = 0;
+    float timeSinceStart;
     Barrel barrel;
     Hammer hammer;
     MuzzleFlash muzzleFlash;
@@ -16,11 +19,16 @@ public class Revolver : MonoBehaviour {
         hammer = GetComponentInChildren<Hammer>();
         muzzleFlash = GetComponentInChildren<MuzzleFlash>();
         body = GetComponentInChildren<Body>();
+
+        audioSource = GetComponent<AudioSource>();
+
     }
 
     // Update is called once per frame
     void Update() {
         CheckDeath();
+
+        timeSinceStart += Time.deltaTime;
 
         if (Input.GetKey(KeyCode.RightArrow)) {
             barrel.PopOut();
@@ -32,7 +40,7 @@ public class Revolver : MonoBehaviour {
             Fire();
         }
         if (Input.GetKey(KeyCode.DownArrow)) {
-            Cock();
+            Cock();           
         }
 
         if (Input.GetKey(KeyCode.W)) {
@@ -49,10 +57,23 @@ public class Revolver : MonoBehaviour {
         }
     }
 
+    public void ResetGame() {
+        foreach (GameObject e in enemySpawner.enemyList) {
+            Destroy(e);
+        }
+        enemySpawner.enemyList.Clear();
+        timeSinceStart = 0;
+        hammer.Reset();
+        barrel.Reset();
+        score = 0;
+    }
+
     protected void CheckDeath() {
         foreach (GameObject go in enemySpawner.enemyList) {
-            if (go.transform.position.z < this.transform.position.z + 0.5f) {
-                OnDeath();  
+            if (go != null) {
+                if (go.transform.position.z < this.transform.position.z + 0.5f) {
+                    OnDeath();
+                }
             }
         }
     }
@@ -89,6 +110,7 @@ public class Revolver : MonoBehaviour {
             if (firedBullet) {
                 muzzleFlash.Flash();
                 Camera.main.GetComponent<CameraBehavior>().Shake();
+                audioSource.PlayOneShot(SoundManager.LoadSoundClip("shot" + Random.Range(1, 3)));
 
                 Vector3 dir = (body.sightPoint - Camera.main.transform.position) * 100f;
 
@@ -99,9 +121,10 @@ public class Revolver : MonoBehaviour {
                 if (Physics.Raycast(body.sightPoint, dir, out hit, 100f, layerMask)) {
                     SlimeEnemy slime = hit.transform.gameObject.GetComponent<SlimeEnemy>();
                     slime.Damage(100);
-                    score+=5;
+                    score += 1;
                 }
-
+            } else {
+                audioSource.PlayOneShot(SoundManager.LoadSoundClip("dryfire"));
             }
         }
     }

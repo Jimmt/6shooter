@@ -24,6 +24,12 @@ public class Barrel : MonoBehaviour {
         TrackRotation();
     }
 
+    public void Reset() {
+        foreach(Cylinder c in cylinders) {
+            c.Eject();
+        }
+    }
+
     public Cylinder GetCurrentCylinder() {
         int maxIndex = 0;
         for(int i = 0; i < cylinders.Length; i++) {
@@ -54,6 +60,7 @@ public class Barrel : MonoBehaviour {
             startingPosition = transform.position;
             popDirection = 1;
             isOut = true;
+            GetComponentInParent<AudioSource>().PlayOneShot(SoundManager.LoadSoundClip("barrel"));
         }
     }
 
@@ -61,6 +68,7 @@ public class Barrel : MonoBehaviour {
         if (isOut) {
             popDirection = -1;
             isOut = false;
+            GetComponentInParent<AudioSource>().PlayOneShot(SoundManager.LoadSoundClip("barrel"));
         }
     }
 

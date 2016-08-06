@@ -23,12 +23,15 @@ public class Hammer : MonoBehaviour {
         hammerT = Mathf.Clamp(hammerT, 0, 1);
         primarySprite.transform.position = startingPosition + new Vector3(0, Mathf.Lerp(0, -height / 2f, hammerT), 0);
 
-        if(hammerT == 1) {
+        if (hammerT == 1) {
             cocked = true;
         }
     }
 
     public void Cock() {
+        if (hammerDirection != 1) {
+            GetComponentInParent<AudioSource>().PlayOneShot(SoundManager.LoadSoundClip("cock"));
+        }
         hammerDirection = 1;
     }
 

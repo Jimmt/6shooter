@@ -87,6 +87,8 @@
     <Compile Include="Assets\SampleScenes\Scripts\PlaceTargetWithMouse.cs" />
     <Compile Include="Assets\SampleScenes\Scripts\SlowMoButton.cs" />
     <Compile Include="Assets\SlimeEnemy.cs" />
+    <Compile Include="Assets\SoundButton.cs" />
+    <Compile Include="Assets\SoundManager.cs" />
     <Compile Include="Assets\UIHandler.cs" />
   </ItemGroup>
   <ItemGroup>

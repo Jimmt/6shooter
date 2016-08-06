@@ -21,6 +21,9 @@ public class Cylinder : MonoBehaviour {
 
     void OnMouseDown() {
         if (barrel.isOut) {
+            if (!filled) {
+                GetComponentInParent<AudioSource>().PlayOneShot(SoundManager.LoadSoundClip("loadBullet"));
+            }
             filled = true;
             renderer.color = Color.white;
         }
@@ -28,16 +31,14 @@ public class Cylinder : MonoBehaviour {
 
     public bool Expel() {
         if (!filled) {
-            print("blank");
             return false;
         } else {
-            print("shot");
             Eject();
             return true;
         }
     }
 
-    void Eject() {
+    public void Eject() {
         filled = false;
         renderer.color = Color.clear;
     }

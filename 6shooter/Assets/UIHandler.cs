@@ -9,13 +9,16 @@ public class UIHandler : MonoBehaviour {
     public float borderMargin;
     public Revolver revolver;
 
-	// Use this for initialization
-	void Start () {
-        mainMenuUI.GetComponent<Image>().rectTransform.sizeDelta = new Vector2(Screen.width, Screen.height);
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    // Use this for initialization
+    void Start() {
+        if (mainMenuUI != null) {
+            mainMenuUI.GetComponent<Image>().rectTransform.sizeDelta = new Vector2(Screen.width, Screen.height);
+        }
+        revolver.enemySpawner.gameObject.SetActive(false);
+    }
+
+    // Update is called once per frame
+    void Update() {
         scoreText.transform.position = new Vector3(Screen.width - scoreText.preferredWidth / 2f - borderMargin, Screen.height - scoreText.preferredHeight / 2f - borderMargin, 0);
         scoreText.text = "SCORE: " + revolver.score;
     }
